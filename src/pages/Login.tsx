@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent, IonInput, IonButton, IonIcon, useIonRouter } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent, IonInput, IonButton, IonIcon, useIonRouter, useIonLoading } from '@ionic/react';
 import { logInOutline, personCircleOutline } from "ionicons/icons";
 import FCC from '../assets/fcc.svg';
 import Intro from "../components/Intro";
@@ -10,6 +10,8 @@ const INTRO_KEY = 'intro-seen';
 const Login = () => {
   const router = useIonRouter();
   const [introSeen, setIntroSeen] = useState(true);
+  const [present, dismiss] = useIonLoading();
+
   useEffect(() => {
     const checkStorage = async () => {
       const seen = await Preferences.get({ key: INTRO_KEY });
@@ -21,15 +23,16 @@ const Login = () => {
     checkStorage();
   }, []);
 
-  const doLogin = (event: any) => {
+  const doLogin = async (event: any) => {
     event.preventDefault();
-    console.log('Logging in...');
-    // router.push('/home', 'forward', 'push');
+    await present('Please wait...');
+    setTimeout(async () => {
+      dismiss();
+      router.push('/app', 'root');
+    }, 2000);
   };
 
   const finishIntro = async () => {
-    console.log(`🧴%cLogin.tsx:17 - introSeen`, 'font-weight:bold; background:#4fb000;color:#fff;'); //DELETEME:
-    console.log(introSeen); // DELETEME:
     setIntroSeen(true);
     Preferences.set({ key: INTRO_KEY, value: "true" });
   };
