@@ -1,11 +1,13 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent, IonInput, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent, IonInput, IonButton, IonIcon, useIonRouter } from '@ionic/react';
 import { logInOutline, personCircleOutline } from "ionicons/icons";
 import FCC from '../assets/fcc.svg';
 
 const Login = () => {
+  const router = useIonRouter();
   const doLogin = (event: any) => {
     event.preventDefault();
     console.log('Logging in...');
+    router.push('/home', 'forward', 'push');
   }
   return (
     <IonPage>

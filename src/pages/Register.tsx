@@ -1,10 +1,13 @@
-import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import { checkmarkDone, checkmarkDoneOutline, logInOutline, personCircleOutline } from 'ionicons/icons';
 
 const Register = () => {
+  const router = useIonRouter();
   const doRegister = (event: any) => {
     event.preventDefault();
+    console.log(`🍊%cRegister.tsx:9 - Creating account...`, 'font-weight:bold; background:#2fd000;color:#fff;'); //DELETEME:
     console.log('Creating account...');
+    router.goBack();
   }
   return (
     <IonPage>
