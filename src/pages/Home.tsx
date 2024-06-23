@@ -3,19 +3,17 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const containerRef = "Home Sweet home";
+  console.log(`🛫%cHome.tsx:7 - containerRef`, 'font-weight:bold; background:#25da00;color:#fff;'); //DELETEME:
+  console.log(containerRef); // DELETEME:
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+        <IonToolbar color="secondary">
+          <IonTitle>FreeCodeCamp LIVE</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent>
         <ExploreContainer />
       </IonContent>
     </IonPage>
