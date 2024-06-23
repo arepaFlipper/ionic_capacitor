@@ -2,9 +2,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonCar
 import { logInOutline, personCircleOutline } from "ionicons/icons";
 import FCC from '../assets/fcc.svg';
 
-type Props = {}
-
-const Login = (props: Props) => {
+const Login = () => {
   const doLogin = (event: any) => {
     event.preventDefault();
     console.log('Logging in...');
@@ -13,10 +11,10 @@ const Login = (props: Props) => {
     <IonPage>
       <IonHeader>
         <IonToolbar color={"success"}>
-          <IonTitle>Title</IonTitle>
+          <IonTitle>Demo App</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent scrollY={false}>
         <div className="ion-text-center ion-padding">
           <img src={FCC} alt="FCC Logo" width={'50%'} />
         </div>
