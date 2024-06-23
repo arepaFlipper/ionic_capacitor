@@ -10,12 +10,21 @@ interface ContainerProps {
   onFinish: () => void;
 }
 
+const SwiperButtonBack = ({ children }: any) => {
+  const swiper = useSwiper();
+  return (
+    <IonButton onClick={() => swiper.slidePrev()}>{children}</IonButton>
+  )
+}
+
 const SwiperButtonNext = ({ children }: any) => {
   const swiper = useSwiper();
   return (
     <IonButton onClick={() => swiper.slideNext()}>{children}</IonButton>
   )
 }
+
+
 
 const Intro = ({ onFinish }: ContainerProps) => {
   return (
@@ -27,8 +36,26 @@ const Intro = ({ onFinish }: ContainerProps) => {
         </IonText>
         <SwiperButtonNext>Next</SwiperButtonNext>
       </SwiperSlide>
-      <SwiperSlide> <img src={Intro2Svg} alt="Intro 2" /> </SwiperSlide>
-      <SwiperSlide> <img src={Intro3Svg} alt="Intro 3" /> </SwiperSlide>
+      <SwiperSlide>
+        <img src={Intro2Svg} alt="Intro 2" />
+        <IonText>
+          <h3>Work in community</h3>
+        </IonText>
+        <div>
+          <SwiperButtonBack>Back</SwiperButtonBack>
+          <SwiperButtonNext>Next</SwiperButtonNext>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide>
+        <img src={Intro3Svg} alt="Intro 3" />
+        <IonText>
+          <h3>Balance your time</h3>
+        </IonText>
+        <div>
+          <SwiperButtonBack>Back</SwiperButtonBack>
+          <IonButton onClick={onFinish}>Get Started</IonButton>
+        </div>
+      </SwiperSlide>
     </Swiper>
   )
 }

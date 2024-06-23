@@ -16,6 +16,7 @@ const Login = () => {
   const finishIntro = async () => {
     console.log(`🧴%cLogin.tsx:17 - introSeen`, 'font-weight:bold; background:#4fb000;color:#fff;'); //DELETEME:
     console.log(introSeen); // DELETEME:
+    setIntroSeen(true);
   }
   return (
     <>
