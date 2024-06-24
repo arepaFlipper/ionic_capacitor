@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
+import { useRef, useState, useEffect } from "react";
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonDatetime, IonFab, IonFabButton, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSegment, IonSegmentButton, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
 import { addOutline, trashBinOutline } from "ionicons/icons";
 
 type TUser = {
@@ -55,7 +55,14 @@ const List: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const modal = useRef<HTMLIonModalElement>(null);
   const cardModal = useRef<HTMLIonModalElement>(null);
+  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
+  const page = useRef(null);
 
+  const [activeSegment, setActiveSegment] = useState<'details' | 'calendar'>('details');
+
+  useEffect(() => {
+    setPresentingElement(page.current);
+  }, [])
 
   //@ts-ignore
   useIonViewWillEnter(async () => {
@@ -101,8 +108,9 @@ const List: React.FC = () => {
     setUsers(data);
     event.detail.complete();
   }
+
   return (
-    <IonPage>
+    <IonPage ref={page}>
       <IonHeader>
         <IonToolbar color={"success"}>
 
@@ -164,20 +172,46 @@ const List: React.FC = () => {
         })}
         <IonModal breakpoints={[0, 0.5, 0.8]} initialBreakpoint={0.5} ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
           <IonHeader>
-            <IonToolbar color={"success"}>
+            <IonToolbar color={"light"}>
               <IonButtons slot="start">
                 <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
               </IonButtons>
               <IonTitle>{`${selectedUser?.name.first} ${selectedUser?.name.last}`}</IonTitle>
             </IonToolbar>
+            <IonToolbar color={"light"}>
+              <IonSegment value={activeSegment} onIonChange={(e) => setActiveSegment(e.detail.value as "details" | "calendar")}>
+                <IonSegmentButton value="details">
+                  <IonLabel>Details</IonLabel>
+                </IonSegmentButton>
+                <IonSegmentButton value="sheet">
+                  <IonLabel>Calendar</IonLabel>
+                </IonSegmentButton>
+              </IonSegment>
+            </IonToolbar>
           </IonHeader>
-          <IonContent>
-            SHEET
+          <IonContent className="ion-padding">
+            {activeSegment === "details" ? (
+              <IonCard>
+                <IonAvatar slot="start">
+                  <IonImg src={selectedUser?.picture.large} />
+                </IonAvatar>
+                <IonCardContent className="ion-no-padding">
+                  <IonItem lines="none">
+                    <IonLabel className="ion-text-wrap">
+                      {`${selectedUser?.name.first} ${selectedUser?.name.last}`}
+                      <p>{selectedUser?.email}</p>
+                    </IonLabel>
+                  </IonItem>
+                </IonCardContent>
+              </IonCard>
+            ) : (
+              <IonDatetime value={new Date().toISOString()} presentation="date"></IonDatetime>
+            )}
           </IonContent>
         </IonModal>
       </IonContent>
 
-      <IonModal ref={cardModal} trigger="card-modal">
+      <IonModal ref={cardModal} trigger="card-modal" presentingElement={presentingElement!}>
         <IonHeader>
           <IonToolbar color={"success"}>
             <IonButtons slot="start">
