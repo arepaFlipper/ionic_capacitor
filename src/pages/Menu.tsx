@@ -1,5 +1,4 @@
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
 import { Redirect, Route } from 'react-router';
 import List from './List';
 import Settings from './Settings';
