@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
-import './Home.css';
-import { trashBinOutline } from "ionicons/icons";
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
+import { addOutline, trashBinOutline } from "ionicons/icons";
 
 type TUser = {
   name: {
@@ -55,6 +54,8 @@ const List: React.FC = () => {
   const [showToast] = useIonToast()
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const modal = useRef<HTMLIonModalElement>(null);
+  const cardModal = useRef<HTMLIonModalElement>(null);
+
 
   //@ts-ignore
   useIonViewWillEnter(async () => {
@@ -161,13 +162,13 @@ const List: React.FC = () => {
             </IonCard>
           )
         })}
-        <IonModal ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
+        <IonModal breakpoints={[0, 0.5, 0.8]} initialBreakpoint={0.5} ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
           <IonHeader>
             <IonToolbar color={"success"}>
               <IonButtons slot="start">
                 <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
               </IonButtons>
-              <IonTitle>User</IonTitle>
+              <IonTitle>{`${selectedUser?.name.first} ${selectedUser?.name.last}`}</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent>
@@ -175,6 +176,26 @@ const List: React.FC = () => {
           </IonContent>
         </IonModal>
       </IonContent>
+
+      <IonModal ref={cardModal} trigger="card-modal">
+        <IonHeader>
+          <IonToolbar color={"success"}>
+            <IonButtons slot="start">
+              <IonButton onClick={() => cardModal.current?.dismiss()}>Close</IonButton>
+            </IonButtons>
+            <IonTitle>{`Card Modal`}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <p>My card modal</p>
+        </IonContent>
+      </IonModal>
+
+      <IonFab vertical="bottom" horizontal="end" slot="fixed">
+        <IonFabButton id="card-modal">
+          <IonIcon icon={addOutline} />
+        </IonFabButton>
+      </IonFab>
     </IonPage>
   );
 };
