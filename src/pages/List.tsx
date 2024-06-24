@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
+import { useRef, useState } from "react";
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
 import './Home.css';
 import { trashBinOutline } from "ionicons/icons";
 
@@ -53,6 +53,8 @@ const List: React.FC = () => {
   const [users, setUsers] = useState<TUser[]>([]);
   const [showAlert] = useIonAlert();
   const [showToast] = useIonToast()
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const modal = useRef<HTMLIonModalElement>(null);
 
   //@ts-ignore
   useIonViewWillEnter(async () => {
@@ -143,7 +145,7 @@ const List: React.FC = () => {
           console.log(`📐%cList.tsx:46 - user`, 'font-weight:bold; background:#916e00;color:#fff;'); //DELETEME:
           console.log(user); // DELETEME:
           return (
-            <IonCard key={idx}>
+            <IonCard key={idx} onClick={() => setSelectedUser(user)}>
               <IonCardContent className="ion-no-padding">
                 <IonItem lines="none">
                   <IonAvatar slot="start">
@@ -159,6 +161,19 @@ const List: React.FC = () => {
             </IonCard>
           )
         })}
+        <IonModal ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
+          <IonHeader>
+            <IonToolbar color={"success"}>
+              <IonButtons slot="start">
+                <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
+              </IonButtons>
+              <IonTitle>User</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            SHEET
+          </IonContent>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
