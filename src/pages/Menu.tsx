@@ -1,12 +1,14 @@
-import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import { Redirect, Route } from 'react-router';
 import List from './List';
 import Settings from './Settings';
-import { homeOutline, newspaperOutline } from 'ionicons/icons';
+import { homeOutline, logOutOutline, newspaperOutline } from 'ionicons/icons';
+
+type TPath = { name: string, url: string, icon: string }
 
 const Menu: React.FC = () => {
-  const paths = [
+  const paths: TPath[] = [
     { name: "Home", url: "/app/list", icon: homeOutline },
     { name: "Settings", url: "/app/settings", icon: newspaperOutline },
   ]
@@ -20,7 +22,7 @@ const Menu: React.FC = () => {
             </IonToolbar>
           </IonHeader>
           <IonContent >
-            {paths.map((item, index) => {
+            {paths.map((item: TPath, index: number) => {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
                   <IonItem detail={false} routerLink={item.url} routerDirection="none">
@@ -30,6 +32,12 @@ const Menu: React.FC = () => {
                 </IonMenuToggle>
               )
             })}
+            <IonMenuToggle autoHide={false}>
+              <IonButton expand="full" routerLink='/' routerDirection="root">
+                <IonIcon slot="start" icon={logOutOutline} />
+                <IonLabel>Logout</IonLabel>
+              </IonButton>
+            </IonMenuToggle>
           </IonContent>
         </IonMenu>
 
