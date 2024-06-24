@@ -66,8 +66,8 @@ const Login = () => {
                   <IonCard>
                     <IonCardContent>
                       <form onSubmit={doLogin}>
-                        <IonInput fill="outline" labelPlacement="floating" label="Email" type="email" placeholder="crizy182@gmail.com"></IonInput>
-                        <IonInput className="ion-margin-top" fill="outline" labelPlacement="floating" label="Password" type="password" placeholder="crizy182@gmail.com"></IonInput>
+                        <IonInput mode="md" fill="outline" labelPlacement="floating" label="Email" type="email" placeholder="crizy182@gmail.com"></IonInput>
+                        <IonInput mode="md" className="ion-margin-top" fill="outline" labelPlacement="floating" label="Password" type="password" placeholder="crizy182@gmail.com"></IonInput>
                         <IonButton className="ion-margin-top" type="submit" expand="full" >
                           Login
                           <IonIcon icon={logInOutline} slot="end"></IonIcon>
