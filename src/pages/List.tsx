@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
 import './Home.css';
 import { trashBinOutline } from "ionicons/icons";
 
@@ -51,7 +51,10 @@ type TUser = {
 const List: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<TUser[]>([]);
+  const [showAlert] = useIonAlert();
+  const [showToast] = useIonToast()
 
+  //@ts-ignore
   useIonViewWillEnter(async () => {
     const users = await getUsers();
     console.log(`♐%cList.tsx:11 - users`, 'font-weight:bold; background:#38c700;color:#fff;'); //DELETEME:
@@ -60,7 +63,29 @@ const List: React.FC = () => {
     setLoading(false);
   });
 
-  const clearList = () => { };
+  const clearList = () => {
+    showAlert({
+      header: 'Confirm',
+      message: 'Are you sure you want to clear the list? 🧼 ',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Clear',
+          handler: () => {
+            setUsers([]);
+            showToast({
+              message: 'List cleared 🗑️',
+              duration: 2000,
+              color: 'danger'
+            })
+          }
+        },
+      ],
+    });
+  };
 
   const getUsers = async () => {
     const data = await fetch("https://randomuser.me/api?results=10");
@@ -68,6 +93,11 @@ const List: React.FC = () => {
     return users.results;
   }
 
+  const doRefresh = async (event: any) => {
+    const data = await getUsers();
+    setUsers(data);
+    event.detail.complete();
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -88,12 +118,15 @@ const List: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        <IonRefresher slot="fixed" onIonRefresh={(ev) => doRefresh(ev)}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {(users.length > 0) && users.map((user: TUser, idx: number) => {
           console.log(`📐%cList.tsx:46 - user`, 'font-weight:bold; background:#916e00;color:#fff;'); //DELETEME:
           console.log(user); // DELETEME:
           return (
             <IonCard key={idx}>
-              <IonCardContent>
+              <IonCardContent className="ion-no-padding">
                 <IonItem lines="none">
                   <IonAvatar slot="start">
                     <IonImg src={user.picture.large} />
@@ -102,6 +135,7 @@ const List: React.FC = () => {
                     {`${user.name.first} ${user.name.last}`}
                     <p>{user.email}</p>
                   </IonLabel>
+                  <IonChip slot="end" color={"primary"}>{user.nat}</IonChip>
                 </IonItem>
               </IonCardContent>
             </IonCard>
