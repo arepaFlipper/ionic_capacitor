@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonChip, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
 import './Home.css';
 import { trashBinOutline } from "ionicons/icons";
 
@@ -121,6 +121,24 @@ const List: React.FC = () => {
         <IonRefresher slot="fixed" onIonRefresh={(ev) => doRefresh(ev)}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
+
+        {(loading) && ([...Array(10)].map((_: any, idx: number) => {
+          return (
+            <IonCard key={idx}>
+              <IonCardContent className="ion-no-padding">Loading...</IonCardContent>
+              <IonItem lines="none">
+                <IonAvatar slot="start">
+                  <IonSkeletonText animated></IonSkeletonText>
+                </IonAvatar>
+                <IonLabel>
+                  <IonSkeletonText animated style={{ width: '150px' }} />
+                  <p><IonSkeletonText /></p>
+                </IonLabel>
+                <IonChip slot="end" color={"primary"}></IonChip>
+              </IonItem>
+            </IonCard>
+          )
+        }))}
         {(users.length > 0) && users.map((user: TUser, idx: number) => {
           console.log(`📐%cList.tsx:46 - user`, 'font-weight:bold; background:#916e00;color:#fff;'); //DELETEME:
           console.log(user); // DELETEME:
