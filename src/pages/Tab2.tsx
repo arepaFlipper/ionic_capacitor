@@ -1,20 +1,17 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
 const Tab2: React.FC = () => {
-  const containerRef = "Home Sweet home";
-  console.log(`🛫%cHome.tsx:7 - containerRef`, 'font-weight:bold; background:#25da00;color:#fff;'); //DELETEME:
-  console.log(containerRef); // DELETEME:
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="success">
-          <IonTitle>Tab 1</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        Tab 1 UI
-      </IonContent>
+      <IonContent className="ion-padding"> Tab 2 UI </IonContent>
     </IonPage>
   );
 };

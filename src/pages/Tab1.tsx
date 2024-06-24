@@ -1,5 +1,4 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
 
 const Tab1: React.FC = () => {
   return (
