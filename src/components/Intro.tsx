@@ -1,32 +1,22 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 import Intro1Svg from '../assets/intro/1.svg';
 import Intro2Svg from '../assets/intro/2.svg';
 import Intro3Svg from '../assets/intro/3.svg';
-import "./Intro.css";
+import './Intro.css';
 
 interface ContainerProps {
   onFinish: () => void;
 }
 
-const SwiperButtonBack = ({ children }: any) => {
-  const swiper = useSwiper();
-  return (
-    <IonButton onClick={() => swiper.slidePrev()}>{children}</IonButton>
-  )
-}
-
 const SwiperButtonNext = ({ children }: any) => {
   const swiper = useSwiper();
-  return (
-    <IonButton onClick={() => swiper.slideNext()}>{children}</IonButton>
-  )
-}
+  return <IonButton onClick={() => swiper.slideNext()}>{children}</IonButton>;
+};
 
-
-
-const Intro = ({ onFinish }: ContainerProps) => {
+const Intro: React.FC<ContainerProps> = ({ onFinish }) => {
   return (
     <Swiper>
       <SwiperSlide>
@@ -36,28 +26,24 @@ const Intro = ({ onFinish }: ContainerProps) => {
         </IonText>
         <SwiperButtonNext>Next</SwiperButtonNext>
       </SwiperSlide>
+
       <SwiperSlide>
         <img src={Intro2Svg} alt="Intro 2" />
         <IonText>
-          <h3>Work in community</h3>
+          <h3>Create powerful native apps with Capacitor.</h3>
         </IonText>
-        <div>
-          <SwiperButtonBack>Back</SwiperButtonBack>
-          <SwiperButtonNext>Next</SwiperButtonNext>
-        </div>
+        <SwiperButtonNext>Next</SwiperButtonNext>
       </SwiperSlide>
+
       <SwiperSlide>
         <img src={Intro3Svg} alt="Intro 3" />
         <IonText>
-          <h3>Balance your time</h3>
+          <h3>Enjoy learning to code!</h3>
         </IonText>
-        <div>
-          <SwiperButtonBack>Back</SwiperButtonBack>
-          <IonButton onClick={onFinish}>Get Started</IonButton>
-        </div>
+        <IonButton onClick={() => onFinish()}>Finish</IonButton>
       </SwiperSlide>
     </Swiper>
-  )
-}
+  );
+};
 
 export default Intro;
