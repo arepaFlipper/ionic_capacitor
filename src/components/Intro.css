@@ -1,6 +1,9 @@
 .swiper {
   height: 100vh;
+  color: #fff;
+  background: #1f4670;
 }
+
 .swiper-slide img {
   height: 40vh;
   margin-bottom: 40px;
@@ -12,4 +15,21 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.button-native,
+.swiper-button-prev .swiper-button-next {
+  border-radius: 0;
+  background: --var(--ion-color-primary);
+  --notchSize: 1.25rem;
+}
+
+ion-button {
+  --border-radius: 0;
+  --notchSize: 1.25rem;
+}
+
+.btn {
+  --border-radius: 0;
+  --notchSize: 1.25rem;
 }
