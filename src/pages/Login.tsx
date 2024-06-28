@@ -4,7 +4,6 @@ import {
   IonCardContent,
   IonCol,
   IonContent,
-  IonFooter,
   IonGrid,
   IonHeader,
   IonIcon,
@@ -18,7 +17,7 @@ import {
 } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import { logInOutline, personCircleOutline } from 'ionicons/icons';
-import FCC from '../assets/fcc.svg';
+import FCC from '../assets/assignar.svg';
 import Intro from '../components/Intro';
 import { Preferences } from '@capacitor/preferences';
 
@@ -26,7 +25,7 @@ const INTRO_KEY = 'intro-seen';
 
 const Login: React.FC = () => {
   const router = useIonRouter();
-  const [introSeen, setIntroSeen] = useState(true);
+  const [introSeen, setIntroSeen] = useState(false);
   const [present, dismiss] = useIonLoading();
 
   useEffect(() => {
@@ -64,7 +63,7 @@ const Login: React.FC = () => {
         <IonPage>
           <IonHeader>
             <IonToolbar color={'success'}>
-              <IonTitle>Free Code Camp</IonTitle>
+              <IonTitle>Assignar Demo</IonTitle>
             </IonToolbar>
           </IonHeader>
 
@@ -72,7 +71,7 @@ const Login: React.FC = () => {
             <IonGrid fixed>
               <IonRow class="ion-justify-content-center">
                 <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
-                  <div className="ion-text-center ion-padding">
+                  <div style={{ display: 'flex', justifyContent: 'center' }} className="ion-text-center ion-padding">
                     <img src={FCC} alt="FCC Logo" width={'50%'} />
                   </div>
                 </IonCol>

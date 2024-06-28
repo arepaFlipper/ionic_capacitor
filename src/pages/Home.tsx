@@ -8,7 +8,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar color="secondary">
-          <IonTitle>FreeCodeCamp LIVE</IonTitle>
+          <IonTitle>Assignar Demo</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
