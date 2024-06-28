@@ -2,7 +2,6 @@ import { IonButton, IonText } from '@ionic/react';
 import React from 'react';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
-import Intro2Svg from '../assets/intro/2.svg';
 import Intro3Svg from '../assets/intro/3.svg';
 import logo from '../assets/assignar.svg';
 import './Intro.css';
@@ -10,6 +9,11 @@ import './Intro.css';
 interface ContainerProps {
   onFinish: () => void;
 }
+
+const SwiperButtonPrev = ({ children }: any) => {
+  const swiper = useSwiper();
+  return <IonButton className="btn btn-primary" onClick={() => swiper.slidePrev()}>{children}</IonButton>;
+};
 
 const SwiperButtonNext = ({ children }: any) => {
   const swiper = useSwiper();
@@ -36,6 +40,7 @@ const Intro: React.FC<ContainerProps> = ({ onFinish }) => {
           <h3>Take on more work with fewer headaches using a schefuling and time-tracking solution that improves communication between the offece and the field.</h3>
         </IonText>
         <div>
+          <SwiperButtonPrev>Back</SwiperButtonPrev>
           <SwiperButtonNext>Next</SwiperButtonNext>
         </div>
       </SwiperSlide>
@@ -46,7 +51,10 @@ const Intro: React.FC<ContainerProps> = ({ onFinish }) => {
           <h1>Work Smarter</h1>
           <h3>Plan, schedule, and deploy crews and equipment all from one place. Send jobsite info directly to the office. Gain greater visibility into your operations so you can improve productivity, increase profits, and build more.</h3>
         </IonText>
-        <IonButton onClick={() => onFinish()}>Finish</IonButton>
+        <div>
+          <SwiperButtonPrev>Back</SwiperButtonPrev>
+          <IonButton className="btn btn-primary" onClick={() => onFinish()}>Finish</IonButton>
+        </div>
       </SwiperSlide>
     </Swiper>
   );
