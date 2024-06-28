@@ -4,8 +4,6 @@ import {
   IonButtons,
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonChip,
   IonContent,
   IonDatetime,
@@ -51,11 +49,13 @@ const List: React.FC = () => {
     setPresentingElement(page.current);
   }, []);
 
-  useIonViewWillEnter(async () => {
-    const users = await getUsers();
-    console.log('🚀 ~ file: List.tsx:10 ~ useIonViewWillEnter ~ users:', users);
-    setUsers(users);
-    setLoading(false);
+  useIonViewWillEnter(() => {
+    (async () => {
+      const users = await getUsers();
+      console.log('🚀 ~ file: List.tsx:10 ~ useIonViewWillEnter ~ users:', users);
+      setUsers(users);
+      setLoading(false);
+    });
   });
 
   const getUsers = async () => {
