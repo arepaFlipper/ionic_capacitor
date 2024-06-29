@@ -1,34 +1,4 @@
-import {
-  IonAvatar,
-  IonButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonChip,
-  IonContent,
-  IonDatetime,
-  IonFab,
-  IonFabButton,
-  IonHeader,
-  IonIcon,
-  IonImg,
-  IonItem,
-  IonLabel,
-  IonMenuButton,
-  IonModal,
-  IonPage,
-  IonRefresher,
-  IonRefresherContent,
-  IonSearchbar,
-  IonSegment,
-  IonSegmentButton,
-  IonSkeletonText,
-  IonTitle,
-  IonToolbar,
-  useIonAlert,
-  useIonToast,
-  useIonViewWillEnter,
-} from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonChip, IonContent, IonDatetime, IonFab, IonFabButton, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonMenuButton, IonModal, IonPage, IonRefresher, IonRefresherContent, IonSearchbar, IonSegment, IonSegmentButton, IonSkeletonText, IonTitle, IonToolbar, useIonAlert, useIonToast, useIonViewWillEnter } from '@ionic/react';
 import { addOutline, trashBinOutline } from 'ionicons/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import './List.css';
@@ -55,7 +25,7 @@ const List: React.FC = () => {
       console.log('🚀 ~ file: List.tsx:10 ~ useIonViewWillEnter ~ users:', users);
       setUsers(users);
       setLoading(false);
-    });
+    })();
   });
 
   const getUsers = async () => {
